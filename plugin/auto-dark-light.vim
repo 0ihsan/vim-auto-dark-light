@@ -1,15 +1,21 @@
 function! ChangeBackground()
 
 	if system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
-		set termguicolors background=dark
-		color gruvbox-material
+		if expand(g:auto_dark_light_dark_tgc)
+			set termguicolors
+		end
+		set background=dark
+		exe 'color '.g:auto_dark_light_dark_theme
 	else
-		color default
+		if expand(g:auto_dark_light_light_tgc)
+			set termguicolors
+		end
 		set background=light
-		hi! Visual ctermfg=None ctermbg=253
-		hi! ColorColumn ctermbg=255
-		hi! link Search Todo
-		hi! Comment ctermfg=7
+		exe 'color '.g:auto_dark_light_light_theme
+		" hi! Visual ctermfg=None ctermbg=253
+		" hi! ColorColumn ctermbg=255
+		" hi! link Search Todo
+		" hi! Comment ctermfg=7
 	endif
 
 endf
